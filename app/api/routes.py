@@ -46,7 +46,7 @@ def get_individual_monster(current_user_token, id):
     response = monster_schema.dump(monster)
     return jsonify(response)
 
-@api.route('/monsters/<id>', methods=['PUT'])
+@api.route('/monsters/<id>', methods=['POST','PUT'])
 @token_required
 def update_monster(current_user_token, id):
     monster = Monster.query.get(id)
@@ -56,7 +56,7 @@ def update_monster(current_user_token, id):
     monster.specialty = request.json['specialty']
     monster.type = request.json['type']
     monster.power_level = request.json['power_level']
-    monster.evolution = request.json['evolution']
+    monster.user_token = current_user_token.token
 
     db.session.commit()
 
