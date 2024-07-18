@@ -80,7 +80,7 @@ def update_monster(current_user_token, id):
         response = monster_schema.dump(monster)
         return jsonify(response), 200  # HTTP status code 200 for OK
     except Exception as e:
-        return jsonify({'error': str(e)}), 400  # HTTP status code 400 for Bad Request
+        return jsonify({'error': str(e)}), 400
     
 @api.route('/monsters/<id>', methods = ['DELETE'])
 @token_required
