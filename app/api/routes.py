@@ -59,7 +59,6 @@ def update_monster(current_user_token, id):
     monster.user_token = current_user_token.token
 
     db.session.commit()
-
     response = monster_schema.dump(monster)
     return jsonify(response)
     
