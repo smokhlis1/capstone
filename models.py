@@ -59,11 +59,10 @@ class Monster(db.Model):
     specialty = db.Column(db.String(150), nullable=False)
     type = db.Column(db.String(200), nullable=True)
     power_level = db.Column(db.Integer, nullable=True)
-    evolution = db.Column(db.Boolean, nullable=False, default=False)
     date_created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     user_token = db.Column(db.String, db.ForeignKey('dueler.token'), nullable = False)
 
-    def __init__(self,name, height, weight,specialty,evolution, user_token, type=None, power_level=None, id = ''):
+    def __init__(self,name, height, weight,specialty, user_token, type=None, power_level=None, id = ''):
         self.id = self.set_id()
         self.name = name
         self.height = height
@@ -71,9 +70,7 @@ class Monster(db.Model):
         self.specialty = specialty
         self.type = type
         self.power_level = power_level
-        self.evolution = evolution
         self.user_token = user_token
-
 
     def __repr__(self):
         return f'The following monster has been added to the Monsterdex: {self.name}'
@@ -83,7 +80,7 @@ class Monster(db.Model):
 
 class MonsterSchema(ma.Schema):
     class Meta:
-        fields = ['id', 'name','height','weight', 'specialty', 'type', 'power_level', 'evolution']
+        fields = ['id', 'name','height','weight', 'specialty', 'type', 'power_level']
 
 monster_schema = MonsterSchema()
 monsters_schema = MonsterSchema(many=True)
